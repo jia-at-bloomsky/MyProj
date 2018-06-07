@@ -5,7 +5,20 @@ import time
 import GFS_processor
 import databuffer
 
-def Prevision1p1(res,var,LON,LAT,Tspan,tmppath):
+def METREX1p1(var,LON,LAT,tmppath,res='0p50',Tspan=24):
+    ''' METREX1p1 outputs hourly forecast:
+
+    res is GFS spatial resolution, '0p50'(default) or '0p25';
+
+    var is variable name, 'tmp2m' for temperature, 'rh2m' for humidity, 'pressfc' for surface pressure;
+
+    LON and LAT are longitude and latitude read from device info;
+
+    Tspan is temporal range for the hourly forecast, 24(default) or 72;
+
+    tmppath is the directory used to temporarily save the most updated GFS data    
+ '''
+
     if ( LON >= -180 ) and ( LON < 0 ):
         LON = LON + 360
 
@@ -40,5 +53,4 @@ def Prevision1p1(res,var,LON,LAT,Tspan,tmppath):
     dataout = ff(np.arange(0,1+(tidx[1]-tidx[0])*3,1))
 
     time_now = time.gmtime(int(time.time()))
-    # return dataout[time_now.tm_hour%6:time_now.tm_hour%6+24]
-    return dataout
+    return dataout[time_now.tm_hour%6+1:time_now.tm_hour%6+Tspan+1]

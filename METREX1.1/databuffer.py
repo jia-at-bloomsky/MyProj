@@ -39,7 +39,7 @@ class DataOnServer():
         if self.fileexist()['prevfile']:
             os.remove(self.tmppath+'/'+self.__prev_filename__())
 
-    def dataload(self):
+    def dataload(self): # load data to ram if currentfile exist
         if not self.fileexist()['currentfile']:
             print self.__current_filename__() + " not exist"
             sys.exit(0)

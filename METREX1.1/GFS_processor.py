@@ -7,18 +7,34 @@ import os
 import csv
 
 def GFS_lonend():
+    ''' dimension of longitude data for the two dif resolutions  '''
     return{
         '0p50':720,
         '0p25':1440
     }
 
 def GFS_latend():
+    ''' dimension of latitude data for the two dif resolutions  '''
     return{
         '0p50':360,
         '0p25':720
     }
 
 class GFS_downloader():
+    ''' download GFS data given resolution, variable, temporal and spatial indices:
+
+    res is GFS resolution, '0p50' or '0p25';
+
+    varname is the variable name in GFS archive, 'tmp2m' for temperature at 2 meters above ground, etc.;
+
+    tidx in form of [ti0, ti1] representing the starting and ending indices in time, ti0==ti1 if just ONE time point is needed;
+
+    latidx in form of [lati0, lati1] representing the starting and ending indices in latitudes, lati0==lati1 if just ONE latitude is needed;
+
+    lonidx in form of [loni0, loni1] representing the starting and ending indices in longitudes, loni0==loni1 if just ONE longitude is needed;
+
+    '''
+
     def __init__(self, res, varname, tidx, latidx, lonidx):
         self.res = res
         self.varname = varname
@@ -96,6 +112,10 @@ class GFS_downloader():
             return data
 
 class index_locator():
+    ''' 
+    locate the indice for longitude/latitude/time ranges
+    '''
+
     def __init__(self,LON,LAT,Tspan,res):
         self.LON = LON
         self.LAT = LAT
@@ -151,6 +171,9 @@ class index_locator():
         return lonidx,latidx,tidx
 
 def getLONLAT(res):
+    '''
+    get longitudes/latitudes for dif resolutions
+    '''
     if res == '0p25':
         return np.arange(0, 360.1, 0.25), np.arange(-90, 90.1, 0.25)
     elif res == '0p50':
