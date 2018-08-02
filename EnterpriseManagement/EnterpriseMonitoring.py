@@ -107,10 +107,10 @@ class device_info():
         if not datadates:
             return []
         if len(datadates)==1:
-            return [pd.DataFrame(list(session.execute(statement,(datadates[0],self.sdp_id)))).version.tolist()[-1]]
+            return [pd.DataFrame(list(self.session.execute(statement,(datadates[0],self.sdp_id)))).version.tolist()[-1]]
         if len(datadates)>1:
-            return [pd.DataFrame(list(session.execute(statement,(datadates[-1],self.sdp_id)))).version.tolist()[-1],\
-                    pd.DataFrame(list(session.execute(statement,(datadates[-2],self.sdp_id)))).version.tolist()[-1]]
+            return [pd.DataFrame(list(self.session.execute(statement,(datadates[-1],self.sdp_id)))).version.tolist()[-1],\
+                    pd.DataFrame(list(self.session.execute(statement,(datadates[-2],self.sdp_id)))).version.tolist()[-1]]
 
     def __checkLocChange(self):
         localdate = (datetime.today() - timedelta(days=1)).replace(tzinfo=pytz.utc). \
