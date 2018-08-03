@@ -12,7 +12,7 @@ except:
         print('Failed to connect to MySQL')
         exit(0)
 
-date = input("please input date in 'YYYYMMDD':  ")
+date = str( input("please input date in 'YYYYMMDD':  ") )
 date = date[:4]+'-'+date[4:6]+'-'+date[6:]
 corg, cspots, rspots, crb, rrb = getsummary(cur,date)
 print date
