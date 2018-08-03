@@ -4,6 +4,9 @@ from EnterpriseMonitoring import *
 from datetime import datetime, timedelta
 import pytz
 
+if datetime.now().replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Asia/Shanghai')).hour != 1:
+    exit(0)
+
 # set up Cassandra connection
 try:
     client, session = setup_connection()
