@@ -75,16 +75,18 @@ for org_id in orgs_id:
             cur.execute(
                 '''INSERT INTO log_spot_daily (
                 date, device_id, device_model, sdp_id, sdp_type, create_date, lastdata_date, days_online, lon, lat,
-                firmware_version, location_update, firmware_update, utc, sdp_name, organization_id, organization_name)
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
+                firmware_version, location_update, firmware_update, utc, sdp_name, online, 
+                organization_id, organization_name)
+                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
                 device_info(session, idevice.sdp_id).device_monitor()+(org_id,name)
             )
         elif idevice.sdp_type == 'rainbucket':
             cur.execute(
                 '''INSERT INTO log_rainbucket_daily (
                 date, device_id, device_model, sdp_id, sdp_type, create_date, lastdata_date, days_online, lon, lat,
-                firmware_version, location_update, firmware_update, utc, sdp_name, organization_id, organization_name)
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
+                firmware_version, location_update, firmware_update, utc, sdp_name, online,
+                organization_id, organization_name)
+                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''',
                 device_info(session, idevice.sdp_id).device_monitor()+(org_id,name)
             )
         else:

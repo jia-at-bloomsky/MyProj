@@ -149,6 +149,7 @@ class device_info():
 
         return localdate, basicinfo.device_id[0], basicinfo.device_model[0], basicinfo.sdp_id[0], basicinfo.sdp_type[0], \
                basicinfo.create_date[0], datadates, lendates, basicinfo.lon[0], basicinfo.lat[0], \
-               firmwares[0], self.__checkLocChange(), firmupdate, float(basicinfo.utc[0]), basicinfo.sdp_name[0]
+               firmwares[0], self.__checkLocChange(), firmupdate, float(basicinfo.utc[0]), basicinfo.sdp_name[0], \
+               str(datadates==localdate)
 
 
